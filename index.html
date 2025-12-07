@@ -104,6 +104,31 @@
             padding-top: 80px;
         }
 
+        .hero-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-text {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+        }
+
+        .profile-photo {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.3);
+        }
+
         .subtitle {
             font-size: 1.5rem;
             color: var(--primary);
@@ -115,6 +140,108 @@
             max-width: 700px;
             margin-bottom: 2rem;
             line-height: 1.8;
+        }
+
+        .project-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .project-card-compact {
+            background: var(--bg-card);
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .project-card-compact:hover {
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+            transform: translateY(-4px);
+            border-color: var(--primary);
+        }
+
+        .project-card-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+        }
+
+        .project-card-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card-body {
+            padding: 2rem;
+        }
+
+        .project-card-description {
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-card-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-card-actions {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-small {
+            padding: 0.6rem 1.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .btn-github {
+            background: var(--bg-dark);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+
+        .btn-github:hover {
+            background: var(--border);
+            border-color: var(--primary);
+        }
+
+        .btn-demo {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-demo:hover {
+            background: #2563eb;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+
+        .btn-demo.disabled {
+            background: var(--border);
+            color: var(--text-light);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .btn-demo.disabled:hover {
+            background: var(--border);
+            box-shadow: none;
         }
 
         .cta-buttons {
@@ -545,7 +672,29 @@
                 padding: 3rem 1rem;
             }
 
-            .metrics-grid {
+            .hero-content {
+                flex-direction: column-reverse;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .profile-photo {
+                width: 200px;
+                height: 200px;
+            }
+
+            .description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .cta-buttons {
+                justify-content: center;
+            }
+
+            .project-cards-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -564,16 +713,24 @@
     </nav>
 
     <section id="home" class="hero">
-        <h1>Alberto Caprini</h1>
-        <p class="subtitle">AI Engineer & Project Manager</p>
-        <p class="description">
-            Mechanical engineer specialized in developing machine learning models and digital twins for HVAC systems. 
-            Experience in designing cloud architectures on Azure and managing R&D projects with a focus on 
-            predictive maintenance and fault detection based on data-driven approaches.
-        </p>
-        <div class="cta-buttons">
-            <a href="#contact" class="btn btn-primary">Get in Touch</a>
-            <a href="#projects" class="btn btn-secondary">View Projects</a>
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Alberto Caprini</h1>
+                <p class="subtitle">AI Engineer & Project Manager</p>
+                <p class="description">
+                    Mechanical engineer specialized in developing machine learning models and digital twins for HVAC systems. 
+                    Experience in designing cloud architectures on Azure and managing R&D projects with a focus on 
+                    predictive maintenance and fault detection based on data-driven approaches.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get in Touch</a>
+                    <a href="#projects" class="btn btn-secondary">View Projects</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <!-- Replace 'your-photo.jpg' with your actual photo filename -->
+                <img src="profilo.png" alt="Alberto Caprini" class="profile-photo">
+            </div>
         </div>
     </section>
 
@@ -656,103 +813,55 @@
     </section>
 
     <section id="journey">
-        <h2>My Journey at Aermec</h2>
-        <p class="description">
-            Since joining Aermec, I've had the opportunity to grow professionally through different phases, 
-            from applied research during my master's thesis to leading strategic R&D projects for the company.
-        </p>
-
-        <div class="journey-grid">
-            <div class="journey-phase">
-                <div class="phase-header">
-                    <h3>Phase 1: Foundation - Thesis Internship</h3>
-                    <span class="phase-badge">Oct 2023 - Feb 2024</span>
+        <h2>My Journey At Aermec</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-date">2023 - Present</div>
+                <div class="timeline-content">
+                    <h3>Senior Software Engineer - Nome Azienda</h3>
+                    <p>
+                        Progettazione e sviluppo di microservizi scalabili per piattaforma e-commerce. 
+                        Leadership tecnica di un team di 5 sviluppatori. Implementazione di best practices 
+                        per code quality e performance optimization.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Node.js</span>
+                        <span class="tag">React</span>
+                        <span class="tag">AWS</span>
+                        <span class="tag">Docker</span>
+                    </div>
                 </div>
-                <p style="color: var(--text-light); margin-bottom: 1rem;">
-                    My entry into the company began with a master's thesis project focused on predictive maintenance. 
-                    This phase allowed me to familiarize myself with HVAC systems and build the foundation for future projects.
-                </p>
-                <h4>Key Achievements:</h4>
-                <ul class="achievement-list">
-                    <li>Developed the company's first digital twin for heat pumps</li>
-                    <li>Experimental validation with accuracy exceeding expectations (RMSE < 3K)</li>
-                    <li>Created a functional GUI for real-time diagnostics</li>
-                    <li>Demonstrated the potential of ML-based predictive maintenance</li>
-                </ul>
-                <h4 style="margin-top: 1rem;">Impact:</h4>
-                <p style="color: var(--text-light);">
-                    The success of the thesis project convinced management to invest in AI-driven diagnostic solutions, 
-                    leading to the creation of a dedicated R&D program.
-                </p>
             </div>
-
-            <div class="journey-phase">
-                <div class="phase-header">
-                    <h3>Phase 2: Expansion - AI Engineer</h3>
-                    <span class="phase-badge">May 2024 - Sep 2024</span>
+            <div class="timeline-item">
+                <div class="timeline-date">2021 - 2023</div>
+                <div class="timeline-content">
+                    <h3>Full Stack Developer - Nome Azienda</h3>
+                    <p>
+                        Sviluppo di applicazioni web full-stack con focus su user experience e performance. 
+                        Collaborazione con product managers e designers per la definizione di roadmap prodotto.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">Vue.js</span>
+                        <span class="tag">PostgreSQL</span>
+                    </div>
                 </div>
-                <p style="color: var(--text-light); margin-bottom: 1rem;">
-                    Transformation of proof-of-concept into a production-ready system. Focus on scalability and integration 
-                    with existing company infrastructure.
-                </p>
-                <h4>Key Achievements:</h4>
-                <ul class="achievement-list">
-                    <li>Migrated on-premise architecture to cloud-based on Azure</li>
-                    <li>Implemented continuous learning pipelines for adaptation to new data</li>
-                    <li>Developed modular Python framework for data processing and model training</li>
-                    <li>Collaborated with IT team for existing systems integration</li>
-                    <li>Conducted field tests on 25+ installed units</li>
-                </ul>
-                <h4 style="margin-top: 1rem;">Innovations Introduced:</h4>
-                <p style="color: var(--text-light);">
-                    Proposed and implemented a serverless architecture that reduced operational costs by 40% compared to 
-                    the initially planned solution, while maintaining high performance.
-                </p>
             </div>
-
-            <div class="journey-phase">
-                <div class="phase-header">
-                    <h3>Phase 3: Leadership - R&D Project Manager</h3>
-                    <span class="phase-badge">Sep 2024 - Present</span>
-                </div>
-                <p style="color: var(--text-light); margin-bottom: 1rem;">
-                    Role evolution towards strategic management of R&D projects, coordination of multidisciplinary teams, 
-                    and defining the technology roadmap for the company's AI solutions.
-                </p>
-                <h4>Current Responsibilities:</h4>
-                <ul class="achievement-list">
-                    <li>Coordinating 3 parallel R&D projects with a total budget of €500K</li>
-                    <li>Managing collaborations with University of Padua (5+ researchers involved)</li>
-                    <li>Supervising 4 master's thesis students on AI/ML topics</li>
-                    <li>Defining technology roadmap for predictive maintenance and digital twin</li>
-                    <li>Presenting results to stakeholders and potential enterprise clients</li>
-                </ul>
-                <h4 style="margin-top: 1rem;">Ongoing Projects:</h4>
-                <p style="color: var(--text-light);">
-                    Currently leading the development of a SaaS platform for remote diagnostics to be launched in Q2 2025, 
-                    with the goal of serving 1000+ HVAC units in the first 12 months.
-                </p>
-            </div>
-        </div>
-
-        <div style="margin-top: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid var(--border);">
-            <h3 style="margin-bottom: 1rem;">Growth Metrics</h3>
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">18 months</div>
-                    <div class="metric-label">From Thesis to Project Manager</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">3</div>
-                    <div class="metric-label">R&D Projects Coordinated</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">5+</div>
-                    <div class="metric-label">Technical Publications</div>
-                </div>
-                <div class="metric-card">
-                    <div class="metric-value">4</div>
-                    <div class="metric-label">Students Supervised</div>
+            <div class="timeline-item">
+                <div class="timeline-date">2019 - 2021</div>
+                <div class="timeline-content">
+                    <h3>Junior Software Engineer - Nome Azienda</h3>
+                    <p>
+                        Sviluppo e manutenzione di componenti frontend e backend. Partecipazione attiva 
+                        a code reviews e sprint planning. Apprendimento rapido di nuove tecnologie e frameworks.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">JavaScript</span>
+                        <span class="tag">React</span>
+                        <span class="tag">Express</span>
+                        <span class="tag">MongoDB</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -760,498 +869,67 @@
 
     <section id="projects">
         <h2>Featured Projects</h2>
-
-        <!-- PROJECT 1: Digital Twin -->
-        <div class="project-detail">
-            <div class="project-header">
-                <h3>Digital Twin for Predictive Maintenance</h3>
-                <p style="color: var(--text-light); margin-bottom: 1rem;">
-                    Hybrid system combining physical modeling and machine learning for advanced diagnostics 
-                    and fault prediction on heat pumps
-                </p>
-                <div class="project-meta">
-                    <div class="meta-item">
-                        <span class="meta-label">Period:</span>
-                        <span>October 2023 - February 2024</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Role:</span>
-                        <span>Lead Developer & Researcher</span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-label">Status:</span>
-                        <span>Deployed in production</span>
-                    </div>
+        
+        <!-- Project Cards Overview -->
+        <div class="project-cards-grid">
+            <!-- Card 1: Digital Twin -->
+            <div class="project-card-compact">
+                <div class="project-card-header">
+                    <h3>Digital Twin for Predictive Maintenance</h3>
+                    <p style="color: var(--text-light); margin-top: 0.5rem;">Master's Thesis Project</p>
                 </div>
-            </div>
-
-            <div class="project-body">
-                <div class="project-section">
-                    <h4>Project Overview</h4>
-                    <p style="color: var(--text-light);">
-                        Development of a complete digital twin for heat pumps that integrates physical modeling based on 
-                        thermodynamic principles with neural networks for anomaly prediction. The system was designed to be 
-                        used both in the design phase and for predictive maintenance of field-installed units.
+                <div class="project-card-body">
+                    <p class="project-card-description">
+                        Hybrid system combining physical modeling in Simscape with neural networks for advanced diagnostics 
+                        and fault prediction on heat pumps. Achieved < 3K RMSE on temperature predictions and 95% accuracy 
+                        in anomaly detection.
                     </p>
-                </div>
-
-                <div class="project-section">
-                    <h4>Key Results</h4>
-                    <div class="metrics-grid">
-                        <div class="metric-card">
-                            <div class="metric-value">< 3 K</div>
-                            <div class="metric-label">RMSE Temperature</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value">< 7%</div>
-                            <div class="metric-label">RRMSE Pressure/Power</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value">95%</div>
-                            <div class="metric-label">Anomaly Detection Accuracy</div>
-                        </div>
-                        <div class="metric-card">
-                            <div class="metric-value">12</div>
-                            <div class="metric-label">Field-Validated Units</div>
-                        </div>
+                    <div class="project-card-tags">
+                        <span class="tag">MATLAB</span>
+                        <span class="tag">Simscape</span>
+                        <span class="tag">Neural Networks</span>
+                        <span class="tag">Predictive Maintenance</span>
+                    </div>
+                    <div class="project-card-actions">
+                        <a href="https://github.com/yourusername/digital-twin-heat-pump" target="_blank" class="btn-small btn-github">
+                            <span>📁</span> View on GitHub
+                        </a>
+                        <a href="./projects/digital-twin-demo.html" class="btn-small btn-demo disabled" onclick="return false;">
+                            <span>🚀</span> Demo (Coming Soon)
+                        </a>
                     </div>
                 </div>
+            </div>
 
-                <div class="project-section">
-                    <h4>System Architecture</h4>
-                    <p style="color: var(--text-light); margin-bottom: 1rem;">
-                        The digital twin is structured in three main layers that work in synergy:
+            <!-- Card 2: Anomaly Detection Framework -->
+            <div class="project-card-compact">
+                <div class="project-card-header">
+                    <h3>Python Framework for Anomaly Detection</h3>
+                    <p style="color: var(--text-light); margin-top: 0.5rem;">Production System</p>
+                </div>
+                <div class="project-card-body">
+                    <p class="project-card-description">
+                        End-to-end modular platform for data processing, ML model training, and deployment of anomaly detection 
+                        systems on production heat pumps. Achieved 92% precision and 88% recall on 25+ field-installed units.
                     </p>
-                    <div class="impact-grid">
-                        <div class="impact-card">
-                            <div class="impact-icon">⚙️</div>
-                            <div class="impact-title">Physical Layer</div>
-                            <div class="impact-description">
-                                Thermodynamic model developed in Simscape that simulates the behavior of compressors, 
-                                heat exchangers, and expansion valves based on state equations
-                            </div>
-                        </div>
-                        <div class="impact-card">
-                            <div class="impact-icon">🧠</div>
-                            <div class="impact-title">ML Layer</div>
-                            <div class="impact-description">
-                                Neural network trained on synthetic data generated by the physical model, optimized to 
-                                detect deviations from normal operating conditions
-                            </div>
-                        </div>
-                        <div class="impact-card">
-                            <div class="impact-icon">📊</div>
-                            <div class="impact-title">Application Layer</div>
-                            <div class="impact-description">
-                                MATLAB GUI for real-time visualization, diagnostics, and fault prediction accessible 
-                                to technicians without programming skills
-                            </div>
-                        </div>
+                    <div class="project-card-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Azure</span>
+                        <span class="tag">FastAPI</span>
                     </div>
-                </div>
-
-                <div class="project-section">
-                    <h4>Technical Challenges & Solutions</h4>
-                    <div class="challenge-list">
-                        <div class="challenge-item">
-                            <div class="challenge-title">🔧 Physical Model Validation</div>
-                            <div class="challenge-solution">
-                                <strong>Challenge:</strong> Achieving sufficient accuracy of the Simscape model over a wide range of operating conditions.<br>
-                                <strong>Solution:</strong> Implemented an iterative parameter tuning approach based on Design of Experiments, 
-                                testing 50+ parametric configurations and validating with experimental test bench data. The final result exceeded 
-                                initial expectations with errors below 5% in all tested conditions.
-                            </div>
-                        </div>
-                        <div class="challenge-item">
-                            <div class="challenge-title">🔬 Training Data Generation</div>
-                            <div class="challenge-solution">
-                                <strong>Challenge:</strong> Limited availability of real fault data for supervised training.<br>
-                                <strong>Solution:</strong> Used the physical model to generate 10,000+ synthetic scenarios including nominal 
-                                and anomalous conditions (refrigerant undercharge 10-30%, condenser fouling 20-60%). This allowed training 
-                                a robust neural network without depending on real faults.
-                            </div>
-                        </div>
-                        <div class="challenge-item">
-                            <div class="challenge-title">⚡ Real-Time Performance</div>
-                            <div class="challenge-solution">
-                                <strong>Challenge:</strong> The complete Simscape model required 30+ seconds per simulation.<br>
-                                <strong>Solution:</strong> Developed a surrogate neural network that replicates the physical model's behavior
-                                with inference < 50ms, enabling real-time diagnostics. The physical model remains available for
-                                validation and complex scenarios.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="project-section">
-                <h4>Diagnostic Capabilities</h4>
-                <p style="color: var(--text-light); margin-bottom: 1rem;">
-                    The system can identify and quantify various types of anomalies:
-                </p>
-                <ul style="color: var(--text-light); margin-left: 1.5rem;">
-                    <li><strong>Refrigerant leakage:</strong> Detection of undercharge up to 5%, with missing quantity estimation (±2%)</li>
-                    <li><strong>Condenser fouling:</strong> Identification of efficiency reduction > 15%, with severity indication</li>
-                    <li><strong>Compressor degradation:</strong> Monitoring of volumetric and isentropic efficiency over time</li>
-                    <li><strong>Expansion valve malfunction:</strong> Detection of anomalous openings or partial blockages</li>
-                </ul>
-            </div>
-
-            <div class="project-section">
-                <h4>Tech Stack</h4>
-                <div class="tech-stack">
-                    <span class="tech-item">MATLAB R2023b</span>
-                    <span class="tech-item">Simscape</span>
-                    <span class="tech-item">Neural Network Toolbox</span>
-                    <span class="tech-item">MATLAB GUI</span>
-                    <span class="tech-item">Optimization Toolbox</span>
-                    <span class="tech-item">Statistics Toolbox</span>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h4>Business Impact</h4>
-                <div class="impact-grid">
-                    <div class="impact-card">
-                        <div class="impact-icon">💰</div>
-                        <div class="impact-title">Maintenance Cost Reduction</div>
-                        <div class="impact-description">
-                            Estimated 30% reduction in maintenance costs through predictive instead of reactive interventions
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">⏱️</div>
-                        <div class="impact-title">Reduced Downtime</div>
-                        <div class="impact-description">
-                            Early fault identification enables planned interventions, reducing downtime by 50%
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">🎯</div>
-                        <div class="impact-title">Competitive Advantage</div>
-                        <div class="impact-description">
-                            First digital twin-based predictive maintenance solution in Aermec's product portfolio
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="expandable-section">
-                <button class="expand-btn" onclick="toggleExpand('dt-details')">
-                    <span>📋 In-Depth Technical Details</span>
-                    <span id="dt-arrow">▼</span>
-                </button>
-                <div class="expand-content" id="dt-details">
-                    <div style="padding: 1.5rem; background: rgba(59, 130, 246, 0.05); margin-top: 1rem; border-radius: 6px;">
-                        <h4>Development Methodology</h4>
-                        <p style="color: var(--text-light); margin-bottom: 1rem;">
-                            The project followed an iterative approach in 4 main phases:
-                        </p>
-                        <ol style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-                            <li><strong>Physical Modeling (4 weeks):</strong> Development of thermodynamic model in Simscape with validation 
-                            at 3 main operating points</li>
-                            <li><strong>ML Training (3 weeks):</strong> Synthetic dataset generation (10K samples), feature engineering, 
-                            neural network training and validation (3 layers, 128-64-32 neurons)</li>
-                            <li><strong>Experimental Validation (5 weeks):</strong> Test bench testing in 25 different operating conditions, 
-                            including 8 simulated fault configurations</li>
-                            <li><strong>GUI Development (2 weeks):</strong> User interface development with real-time visualization, 
-                            alert system, and PDF report export</li>
-                        </ol>
-                        
-                        <h4 style="margin-top: 1.5rem;">Dataset and Training</h4>
-                        <ul style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-                            <li>10,000 synthetic scenarios generated (70% nominal, 30% anomaly conditions)</li>
-                            <li>Features: 24 variables (temperatures, pressures, powers, efficiency)</li>
-                            <li>Training: 70% train, 15% validation, 15% test</li>
-                            <li>Epochs: 200 with early stopping (patience=20)</li>
-                            <li>Optimizer: Adam (lr=0.001)</li>
-                            <li>Loss: MSE for regression, Cross-Entropy for classification</li>
-                        </ul>
+                    <div class="project-card-actions">
+                        <a href="https://github.com/yourusername/hvac-anomaly-detection" target="_blank" class="btn-small btn-github">
+                            <span>📁</span> View on GitHub
+                        </a>
+                        <a href="./projects/anomaly-detection-demo.html" class="btn-small btn-demo disabled" onclick="return false;">
+                            <span>🚀</span> Demo (Coming Soon)
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-
-    <!-- PROJECT 2: Anomaly Detection Framework -->
-    <div class="project-detail">
-        <div class="project-header">
-            <h3>Python Framework for HVAC Systems Anomaly Detection</h3>
-            <p style="color: var(--text-light); margin-bottom: 1rem;">
-                End-to-end modular platform for data processing, ML model training, and deployment of 
-                anomaly detection systems on production heat pumps
-            </p>
-            <div class="project-meta">
-                <div class="meta-item">
-                    <span class="meta-label">Period:</span>
-                    <span>May 2024 - Present</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Role:</span>
-                    <span>Lead AI Engineer & Architect</span>
-                </div>
-                <div class="meta-item">
-                    <span class="meta-label">Status:</span>
-                    <span>Production (beta)</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="project-body">
-            <div class="project-section">
-                <h4>Project Overview</h4>
-                <p style="color: var(--text-light);">
-                    Scalable Python framework designed to manage the entire lifecycle of ML models for anomaly detection: 
-                    from acquisition and processing of data from field-installed units, to training and validation of models, 
-                    to deployment and monitoring in production. The system was designed with a focus on modularity, 
-                    reusability, and ease of extension to new HVAC unit types.
-                </p>
-            </div>
-
-            <div class="project-section">
-                <h4>3-Layer Architecture</h4>
-                <div class="impact-grid">
-                    <div class="impact-card">
-                        <div class="impact-icon">🔄</div>
-                        <div class="impact-title">Data Processing Layer</div>
-                        <div class="impact-description">
-                            Automated ETL pipeline for IoT sensor data acquisition, cleaning, normalization, and 
-                            feature engineering. Handles heterogeneous formats and missing data with adaptive strategies
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">🤖</div>
-                        <div class="impact-title">ML Training Layer</div>
-                        <div class="impact-description">
-                            Framework for training and validation of supervised and unsupervised models (AutoEncoder, 
-                            Isolation Forest, LSTM). Automatic hyperparameter tuning and model versioning
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">🚨</div>
-                        <div class="impact-title">Anomaly Detection Layer</div>
-                        <div class="impact-description">
-                            Real-time inference system with adaptive thresholds, alert management, and interactive dashboard 
-                            for anomaly visualization and KPIs
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h4>Field Test Results</h4>
-                <div class="metrics-grid">
-                    <div class="metric-card">
-                        <div class="metric-value">25+</div>
-                        <div class="metric-label">Units Monitored</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">92%</div>
-                        <div class="metric-label">Precision</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">88%</div>
-                        <div class="metric-label">Recall</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">< 5%</div>
-                        <div class="metric-label">False Positive Rate</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">15 min</div>
-                        <div class="metric-label">Average Detection Time</div>
-                    </div>
-                    <div class="metric-card">
-                        <div class="metric-value">2.5M</div>
-                        <div class="metric-label">Datapoints Processed</div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h4>Main Framework Modules</h4>
-                <div class="challenge-list">
-                    <div class="challenge-item">
-                        <div class="challenge-title">📥 Data Acquisition Module</div>
-                        <div class="challenge-solution">
-                            Connectors for multiple data sources (MQTT, REST API, CSV files). Automatic handling of 
-                            intermittent connections and retry logic. Local buffer for resilience in case of connectivity loss. 
-                            <strong>Features:</strong> Unit auto-discovery, dynamic sampling rate configuration, data compression.
-                        </div>
-                    </div>
-                    <div class="challenge-item">
-                        <div class="challenge-title">🧹 Preprocessing Pipeline</div>
-                        <div class="challenge-solution">
-                            Configurable pipeline with modular steps: outlier detection (IQR, Z-score), imputation (forward-fill, 
-                            interpolation), resampling, feature extraction (rolling statistics, FFT features). 
-                            <strong>Performance:</strong> Processing of 100K samples/sec on single core.
-                        </div>
-                    </div>
-                    <div class="challenge-item">
-                        <div class="challenge-title">🎓 ML Training Engine</div>
-                        <div class="challenge-solution">
-                            Unified framework for training different models with common interface. Supports scikit-learn, 
-                            PyTorch, and custom models. Includes: automatic cross-validation, hyperparameter optimization (Optuna), 
-                            model selection, performance tracking. <strong>Implemented models:</strong> AutoEncoder (LSTM-based), 
-                            Isolation Forest, One-Class SVM, Statistical baselines.
-                        </div>
-                    </div>
-                    <div class="challenge-item">
-                        <div class="challenge-title">🎯 Anomaly Detector</div>
-                        <div class="challenge-solution">
-                            Inference system with model ensemble to reduce false positives. Adaptive thresholds based 
-                            on operating conditions (ambient temperature, load). Alert system with severity levels and notification 
-                            routing. <strong>Latency:</strong> < 100ms for single inference, supports batch processing for high throughput.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h4>Technical Challenges Addressed</h4>
-                <div class="challenge-list">
-                    <div class="challenge-item">
-                        <div class="challenge-title">⚖️ Imbalanced Data Handling</div>
-                        <div class="challenge-solution">
-                            <strong>Problem:</strong> Anomalies represent < 2% of real data, causing bias toward negative predictions.<br>
-                            <strong>Solution:</strong> Implemented hybrid approach with synthetic minority oversampling (SMOTE), 
-                            dynamic class weights, and post-training threshold tuning. Result: F1-score improved from 0.65 to 0.90.
-                        </div>
-                    </div>
-                    <div class="challenge-item">
-                        <div class="challenge-title">🌡️ Operating Conditions Variability</div>
-                        <div class="challenge-solution">
-                            <strong>Problem:</strong> Very different operating patterns between summer/winter, day/night, causing false positives.<br>
-                            <strong>Solution:</strong> Developed context-aware thresholding system with 8 different operating profiles. 
-                            Additional features: season, time of day, outdoor temperature. 60% reduction in false positives.
-                        </div>
-                    </div>
-                    <div class="challenge-item">
-                        <div class="challenge-title">🔌 Scalability and Performance</div>
-                        <div class="challenge-solution">
-                            <strong>Problem:</strong> System must handle 25+ units with 50+ sensors each at 1Hz sampling rate.<br>
-                            <strong>Solution:</strong> Asynchronous architecture with async/await, connection pooling, data batching. 
-                            Distributed processing with Ray for parallel training. Monitoring: < 5% CPU usage per monitored unit.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h4>Types of Anomalies Detected</h4>
-                <ul style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-                    <li><strong>Performance Degradation:</strong> Gradual reduction in efficiency (COP) over time</li>
-                    <li><strong>Sensor Faults:</strong> Erroneous or out-of-range readings from malfunctioning sensors</li>
-                    <li><strong>Refrigerant Leakage:</strong> Gradual leaks detected through pressure trend analysis</li>
-                    <li><strong>Fouling:</strong> Dirt accumulation on heat exchangers reducing efficiency</li>
-                    <li><strong>Compressor Issues:</strong> Anomalies in compressor behavior</li>
-                    <li><strong>Control Malfunctions:</strong> Anomalous control system behavior</li>
-                </ul>
-            </div>
-
-            <div class="project-section">
-                <h4>Tech Stack</h4>
-                <div class="tech-stack">
-                    <span class="tech-item">Python 3.10+</span>
-                    <span class="tech-item">PyTorch</span>
-                    <span class="tech-item">Scikit-learn</span>
-                    <span class="tech-item">Pandas</span>
-                    <span class="tech-item">NumPy</span>
-                    <span class="tech-item">Optuna</span>
-                    <span class="tech-item">Ray</span>
-                    <span class="tech-item">FastAPI</span>
-                    <span class="tech-item">Azure Functions</span>
-                    <span class="tech-item">Azure Logic Apps</span>
-                    <span class="tech-item">Docker</span>
-                </div>
-            </div>
-
-            <div class="project-section">
-                <h4>Business Impact</h4>
-                <div class="impact-grid">
-                    <div class="impact-card">
-                        <div class="impact-icon">⏱️</div>
-                        <div class="impact-title">Time-to-Market</div>
-                        <div class="impact-description">
-                            70% reduction in time needed to develop and deploy new ML models thanks 
-                            to the framework's modular approach
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">💡</div>
-                        <div class="impact-title">Proactive Maintenance</div>
-                        <div class="impact-description">
-                            Identification of 15+ real anomalies in field tests, enabling preventive interventions 
-                            before critical failures
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">📈</div>
-                        <div class="impact-title">Scalability</div>
-                        <div class="impact-description">
-                            Architecture designed to scale to 1000+ monitored units with linear operational costs 
-                            thanks to serverless architecture
-                        </div>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-icon">🔄</div>
-                        <div class="impact-title">Continuous Learning</div>
-                        <div class="impact-description">
-                            Automated pipeline for periodic re-training with new data, enabling adaptation 
-                            to new operating conditions
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="expandable-section">
-                <button class="expand-btn" onclick="toggleExpand('fw-details')">
-                    <span>📋 Implementation Technical Details</span>
-                    <span id="fw-arrow">▼</span>
-                </button>
-                <div class="expand-content" id="fw-details">
-                    <div style="padding: 1.5rem; background: rgba(59, 130, 246, 0.05); margin-top: 1rem; border-radius: 6px;">
-                        <h4>Cloud Architecture on Azure</h4>
-                        <ul style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-                            <li><strong>Data Ingestion:</strong> Azure IoT Hub for IoT device data acquisition</li>
-                            <li><strong>Stream Processing:</strong> Azure Stream Analytics for real-time preprocessing</li>
-                            <li><strong>Storage:</strong> Azure Data Lake Gen2 for raw data, Azure SQL for metadata</li>
-                            <li><strong>Compute:</strong> Azure Functions (Python) for inference, Azure ML for training</li>
-                            <li><strong>Orchestration:</strong> Azure Logic Apps for workflow automation</li>
-                            <li><strong>Monitoring:</strong> Application Insights for performance monitoring</li>
-                        </ul>
-                        
-                        <h4 style="margin-top: 1.5rem;">Design Patterns Used</h4>
-                        <ul style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-                            <li><strong>Factory Pattern:</strong> For dynamic creation of preprocessors and models</li>
-                            <li><strong>Strategy Pattern:</strong> For context-based detection algorithm selection</li>
-                            <li><strong>Observer Pattern:</strong> For alert system and notification management</li>
-                            <li><strong>Pipeline Pattern:</strong> For preprocessing step composition</li>
-                        </ul>
-
-                        <h4 style="margin-top: 1.5rem;">Testing Strategy</h4>
-                        <ul style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-                            <li>Unit tests: >90% coverage with pytest</li>
-                            <li>Integration tests: complete pipeline testing with mock data</li>
-                            <li>Performance tests: profiling with cProfile, memory profiling with memory_profiler</li>
-                            <li>A/B testing: new model vs baseline performance comparison in production</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div style="margin-top: 3rem; background: var(--bg-card); padding: 2rem; border-radius: 8px; border: 1px solid var(--border);">
-        <h3 style="margin-bottom: 1rem;">💡 Next Steps</h3>
-        <p style="color: var(--text-light); margin-bottom: 1rem;">
-            Projects in development and technology roadmap for the next 12 months:
-        </p>
-        <ul style="color: var(--text-light); margin-left: 1.5rem; line-height: 1.8;">
-            <li>Framework extension to new HVAC unit types (chillers, rooftops)</li>
-            <li>Implementation of explainable AI to improve user trust</li>
-            <li>Development of mobile app for technicians with real-time dashboard</li>
-            <li>Integration with enterprise BMS (Building Management Systems)</li>
-            <li>Research on federated learning for privacy-preserving distributed training</li>
-        </ul>
+        
     </div>
 </section>
 
@@ -1270,12 +948,8 @@
             <a href="https://www.linkedin.com/in/albertocaprini" target="_blank">linkedin.com/in/albertocaprini</a>
         </div>
         <div class="contact-item">
-            <strong>Phone:</strong>
-            <span style="color: var(--text);">+39 346 475 0659</span>
-        </div>
-        <div class="contact-item">
             <strong>Location:</strong>
-            <span style="color: var(--text);">Verona, Italy</span>
+            <span style="color: var(--text);">Padova, Italy</span>
         </div>
     </div>
 </section>
