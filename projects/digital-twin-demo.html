@@ -37,13 +37,13 @@
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 1rem 2rem;
         }
 
         header {
             text-align: center;
-            margin-bottom: 3rem;
-            padding: 2rem;
+            margin-bottom: 1rem;
+            padding: 1rem;
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
             border-radius: 12px;
             border: 1px solid var(--border);
@@ -51,26 +51,26 @@
 
         h1 {
             color: var(--secondary);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            margin-bottom: 0.25rem;
         }
 
         .subtitle {
             color: var(--text-light);
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
 
         .main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-bottom: 2rem;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
         }
 
         .card {
             background: var(--bg-card);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             border: 1px solid var(--border);
             transition: all 0.3s;
         }
@@ -84,47 +84,48 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
             border-bottom: 2px solid var(--border);
         }
 
         .card-icon {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
         }
 
         .card-title {
             color: var(--secondary);
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
         }
 
         .input-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 0.75rem;
         }
 
         .input-label {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.4rem;
             color: var(--text);
             font-weight: 500;
+            font-size: 0.95rem;
         }
 
         .input-range {
             color: var(--text-light);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
 
         .input-field {
             width: 100%;
-            padding: 0.75rem 1rem;
+            padding: 0.6rem 0.9rem;
             background: var(--bg-dark);
             border: 2px solid var(--border);
             border-radius: 8px;
             color: var(--text);
-            font-size: 1rem;
+            font-size: 0.95rem;
             transition: all 0.3s;
         }
 
@@ -188,15 +189,15 @@
         .button-group {
             display: flex;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .btn {
             flex: 1;
-            padding: 1rem 2rem;
+            padding: 0.7rem 1.5rem;
             border: none;
             border-radius: 8px;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
@@ -245,7 +246,8 @@
         }
 
         .output-table td {
-            padding: 0.75rem;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.9rem;
         }
 
         .output-table td:first-child {
@@ -262,9 +264,9 @@
         .chart-container {
             background: var(--bg-card);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 1.5rem;
             border: 1px solid var(--border);
-            margin-top: 2rem;
+            margin-top: 1.5rem;
         }
 
         .chart-wrapper {
@@ -273,15 +275,16 @@
         }
 
         .alert {
-            padding: 1rem;
+            padding: 0.75rem;
             border-radius: 8px;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            font-size: 0.9rem;
         }
 
-        .alert-warning { 
+        .alert-warning {
             background: rgba(245, 158, 11, 0.1);
             border: 1px solid var(--warning);
             color: var(--warning);
@@ -297,27 +300,27 @@
             background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
             border: 1px solid var(--primary);
             border-radius: 8px;
-            padding: 1.5rem;
+            padding: 1rem;
             text-align: center;
             margin-top: 1rem;
         }
 
         .discharge-label {
             color: var(--text-light);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.85rem;
+            margin-bottom: 0.4rem;
         }
 
         .discharge-value {
             color: var(--primary);
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: bold;
         }
 
         .loading {
             display: none;
             text-align: center;
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .loading.active {
@@ -367,14 +370,15 @@
             background: rgba(59, 130, 246, 0.1);
             border: 1px solid rgba(59, 130, 246, 0.3);
             border-radius: 8px;
-            padding: 1rem;
-            margin-top: 1rem;
+            padding: 0.6rem;
+            margin-top: 0.75rem;
         }
 
         .info-box p {
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             color: var(--text-light);
             margin: 0;
+            line-height: 1.4;
         }
     </style>
 </head>
@@ -400,7 +404,7 @@
                         <span>Compressor Speed (rps)</span>
                         <span class="input-range">[35, 105]</span>
                     </label>
-                    <input type="number" id="rps" class="input-field" value="70" min="35" max="105" step="1">
+                    <input type="number" id="rps" class="input-field" value="105" min="35" max="105" step="1" readonly>
                 </div>
 
                 <div class="input-group">
@@ -408,7 +412,7 @@
                         <span>Air Temperature (°C)</span>
                         <span class="input-range">[0, 40]</span>
                     </label>
-                    <input type="number" id="taria" class="input-field" value="20" min="0" max="40" step="0.1">
+                    <input type="number" id="taria" class="input-field" value="20" min="0" max="40" step="0.1" readonly>
                 </div>
 
                 <div class="input-group">
@@ -416,35 +420,19 @@
                         <span>Water Inlet Temperature (°C)</span>
                         <span class="input-range">[5, 24]</span>
                     </label>
-                    <input type="number" id="twin" class="input-field" value="15" min="5" max="24" step="0.1">
+                    <input type="number" id="twin" class="input-field" value="12.36" min="5" max="24" step="0.01" readonly>
                 </div>
 
                 <div class="input-group">
                     <label class="input-label">
-                        <span>Superheat (°C)</span>
+                        <span>Superheat (K)</span>
                         <span class="input-range">[2, 8]</span>
                     </label>
-                    <input type="number" id="sh" class="input-field" value="5" min="2" max="8" step="0.1">
+                    <input type="number" id="sh" class="input-field" value="3.20" min="2" max="8" step="0.01" readonly>
                 </div>
 
-                <div class="input-group">
-                    <label class="input-label">
-                        <span>Pressure Display</span>
-                    </label>
-                    <div class="switch-container">
-                        <span>Absolute</span>
-                        <label class="switch">
-                            <input type="checkbox" id="pressureSwitch">
-                            <span class="slider"></span>
-                        </label>
-                        <span>Relative</span>
-                    </div>
-                </div>
 
                 <div class="button-group">
-                    <!-- <button class="btn btn-secondary" onclick="importData()">
-                        📂 Import Data
-                    </button> -->
                     <button class="btn btn-primary" onclick="runSimulation()">
                         ▶️ Run Simulation
                     </button>
@@ -507,7 +495,7 @@
         let simulationData = null;
         let myChart = null;
 
-        // Digital Twin Neural Network (Simplified Version)
+        // Complete Digital Twin Neural Network
         function digitalTwinNN(inputs) {
             // Normalize inputs [0, 1]
             const normalized = [
@@ -545,7 +533,6 @@
 
             return outputs;
         }
-
         function validateInputs() {
             const rps = parseFloat(document.getElementById('rps').value);
             const taria = parseFloat(document.getElementById('taria').value);
@@ -584,7 +571,7 @@
 
         function runSimulation() {
             // Validate inputs
-            document.getElementById('rps').dispatchEvent(new Event('input'));
+            validateInputs();
             
             // Get inputs
             const inputs = [
@@ -597,34 +584,38 @@
             // Show loading
             document.getElementById('loading').classList.add('active');
             document.getElementById('outputTable').style.display = 'none';
+            
+            // Hide previous results
+            document.getElementById('dischargeResult').style.display = 'none';
+            document.getElementById('chartContainer').style.display = 'none';
 
             // Simulate network delay
             setTimeout(() => {
-                // Run neural network
-                const outputs = digitalTwinNN(inputs);
-                simulationData = outputs;
+                try {
+                    // Run neural network
+                    const outputs = digitalTwinNN(inputs);
+                    
+                    // Store original outputs (absolute pressures)
+                    simulationData = [...outputs];
 
-                // Check if relative pressure
-                const isRelative = document.getElementById('pressureSwitch').checked;
-                if (isRelative) {
-                    outputs[0] -= 1.01325;
-                    outputs[1] -= 1.01325;
-                    outputs[4] -= 1.01325;
-                    outputs[5] -= 1.01325;
-                    outputs[8] -= 1.01325;
-                    outputs[10] -= 1.01325;
+                    const displayOutputs = [...outputs];
+
+
+                    // Display results
+                    displayResults(displayOutputs);
+
+                    // Hide loading
+                    document.getElementById('loading').classList.remove('active');
+                    document.getElementById('outputTable').style.display = 'block';
+
+                    // Enable buttons
+                    document.getElementById('anomalyBtn').disabled = false;
+                    document.getElementById('dischargeBtn').disabled = false;
+                } catch (error) {
+                    console.error('Neural network error:', error);
+                    document.getElementById('loading').classList.remove('active');
+                    alert('Error running neural network simulation. Please check console for details.');
                 }
-
-                // Display results
-                displayResults(outputs);
-
-                // Hide loading
-                document.getElementById('loading').classList.remove('active');
-                document.getElementById('outputTable').style.display = 'block';
-
-                // Enable buttons
-                document.getElementById('anomalyBtn').disabled = false;
-                document.getElementById('dischargeBtn').disabled = false;
             }, 1500);
         }
 
@@ -684,11 +675,25 @@
                 'Twout', 'Presa', 'Pass'
             ];
 
-            // Normalize data for radar chart [0, 100]
+            // Normalize each variable independently based on its own range with some margin
             const normalizeData = (data) => {
-                const max = Math.max(...data);
-                const min = Math.min(...data);
-                return data.map(val => ((val - min) / (max - min)) * 100);
+                return data.map((val, idx) => {
+                    const modelVal = modelData[idx];
+                    const expVal = expData[idx];
+                    
+                    // Create range based on both model and experimental values
+                    const maxVal = Math.max(modelVal, expVal);
+                    const minVal = Math.min(modelVal, expVal);
+                    const range = maxVal - minVal;
+                    
+                    // Add 20% margin on each side
+                    const margin = range * 0.2 || maxVal * 0.1; // Fallback if range is 0
+                    const min = minVal - margin;
+                    const max = maxVal + margin;
+                    
+                    // Normalize to [0, 100]
+                    return ((val - min) / (max - min)) * 100;
+                });
             };
 
             const ctx = document.getElementById('spiderChart');
@@ -698,30 +703,42 @@
                 myChart.destroy();
             }
 
+            // Calculate errors for display
+            const errors = modelData.map((val, idx) => {
+                const error = ((val - expData[idx]) / expData[idx] * 100).toFixed(1);
+                return error;
+            });
+
             myChart = new Chart(ctx, {
                 type: 'radar',
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Model Prediction',
+                        label: 'Neural Network Prediction',
                         data: normalizeData(modelData),
                         borderColor: 'rgb(59, 130, 246)',
-                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
-                        borderWidth: 2,
+                        backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                        borderWidth: 3,
                         pointBackgroundColor: 'rgb(59, 130, 246)',
                         pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                        pointHoverBorderColor: 'rgb(59, 130, 246)',
+                        pointHoverRadius: 7
                     }, {
-                        label: 'Experimental Data',
+                        label: 'Experimental Data (Field Test)',
                         data: normalizeData(expData),
                         borderColor: 'rgb(251, 146, 60)',
-                        backgroundColor: 'rgba(251, 146, 60, 0.2)',
-                        borderWidth: 2,
+                        backgroundColor: 'rgba(251, 146, 60, 0.15)',
+                        borderWidth: 3,
                         pointBackgroundColor: 'rgb(251, 146, 60)',
                         pointBorderColor: '#fff',
+                        pointBorderWidth: 2,
+                        pointRadius: 5,
                         pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: 'rgb(251, 146, 60)'
+                        pointHoverBorderColor: 'rgb(251, 146, 60)',
+                        pointHoverRadius: 7
                     }]
                 },
                 options: {
@@ -731,19 +748,29 @@
                         r: {
                             beginAtZero: true,
                             max: 100,
+                            min: 0,
                             ticks: {
-                                stepSize: 20,
+                                stepSize: 25,
                                 color: '#94a3b8',
-                                backdropColor: 'transparent'
+                                backdropColor: 'transparent',
+                                font: {
+                                    size: 12
+                                }
                             },
                             grid: {
+                                color: '#334155',
+                                circular: true
+                            },
+                            angleLines: {
                                 color: '#334155'
                             },
                             pointLabels: {
                                 color: '#cbd5e1',
                                 font: {
-                                    size: 12
-                                }
+                                    size: 13,
+                                    weight: '500'
+                                },
+                                padding: 10
                             }
                         }
                     },
@@ -753,17 +780,88 @@
                             labels: {
                                 color: '#cbd5e1',
                                 font: {
-                                    size: 14
+                                    size: 14,
+                                    weight: '500'
                                 },
-                                padding: 20
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                            titleColor: '#e2e8f0',
+                            bodyColor: '#cbd5e1',
+                            borderColor: '#334155',
+                            borderWidth: 1,
+                            padding: 12,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const idx = context.dataIndex;
+                                    const datasetLabel = context.dataset.label;
+                                    const rawValue = context.dataset.label.includes('Neural') ? 
+                                        modelData[idx] : expData[idx];
+                                    const error = errors[idx];
+                                    
+                                    return [
+                                        `${datasetLabel}: ${rawValue.toFixed(2)}`,
+                                        `Error: ${error}%`
+                                    ];
+                                }
                             }
                         }
+                    },
+                    interaction: {
+                        mode: 'point',
+                        intersect: true
                     }
                 }
             });
+
+            // Display summary statistics
+            displayStatistics(modelData, expData, errors);
         }
 
-        function calculateDischarge() {
+        function displayStatistics(modelData, expData, errors) {
+            const avgError = (errors.reduce((sum, e) => sum + Math.abs(parseFloat(e)), 0) / errors.length).toFixed(2);
+            const maxError = Math.max(...errors.map(e => Math.abs(parseFloat(e)))).toFixed(2);
+            
+            const statsDiv = document.createElement('div');
+            statsDiv.style.marginTop = '2rem';
+            statsDiv.style.padding = '1.5rem';
+            statsDiv.style.background = 'rgba(59, 130, 246, 0.1)';
+            statsDiv.style.borderRadius = '8px';
+            statsDiv.style.border = '1px solid rgba(59, 130, 246, 0.3)';
+            statsDiv.innerHTML = `
+                <h3 style="color: var(--secondary); margin-bottom: 1rem; font-size: 1.2rem;">📊 Prediction Accuracy</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <div>
+                        <div style="color: var(--text-light); font-size: 0.9rem;">Average Error</div>
+                        <div style="color: var(--primary-light); font-size: 1.8rem; font-weight: bold;">${avgError}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-light); font-size: 0.9rem;">Maximum Error</div>
+                        <div style="color: var(--warning); font-size: 1.8rem; font-weight: bold;">${maxError}%</div>
+                    </div>
+                    <div>
+                        <div style="color: var(--text-light); font-size: 0.9rem;">Model Status</div>
+                        <div style="color: var(--success); font-size: 1.2rem; font-weight: bold;">
+                            ${parseFloat(avgError) < 5 ? '✓ Excellent' : parseFloat(avgError) < 10 ? '✓ Good' : '⚠ Acceptable'}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            const chartContainer = document.getElementById('chartContainer');
+            const existingStats = chartContainer.querySelector('[style*="margin-top: 2rem"]');
+            if (existingStats && existingStats !== statsDiv) {
+                existingStats.remove();
+            }
+            chartContainer.appendChild(statsDiv);
+        }
+
+       function calculateDischarge() {
             if (!simulationData) {
                 alert('Please run simulation first!');
                 return;
@@ -813,6 +911,7 @@
         document.getElementById('taria').addEventListener('input', validateInputs);
         document.getElementById('twin').addEventListener('input', validateInputs);
         document.getElementById('sh').addEventListener('input', validateInputs);
+
     </script>
 </body>
 </html>
