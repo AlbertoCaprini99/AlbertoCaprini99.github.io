@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Twin Demo - Heat Pump Simulation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #3b82f6;
+            --primary-dark: #2563eb;
+            --secondary: #e2e8f0;
+            --text: #cbd5e1;
+            --text-dark: #1e293b;
+            --text-light: #94a3b8;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --border: #334155;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        h1 {
+            color: var(--secondary);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .subtitle {
+            color: var(--text-light);
+            font-size: 1.1rem;
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 8px 24px rgba(59, 130, 246, 0.15);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-title {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .input-range {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-dark);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            color: var(--text);
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .switch-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--border);
+            transition: 0.4s;
+            border-radius: 30px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: 0.4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: var(--primary);
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(30px);
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .btn-secondary {
+            background: var(--border);
+            color: var(--text);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-light);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .output-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .output-table tr {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .output-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .output-table td {
+            padding: 0.75rem;
+        }
+
+        .output-table td:first-child {
+            color: var(--text-light);
+            font-weight: 500;
+        }
+
+        .output-table td:last-child {
+            text-align: right;
+            color: var(--secondary);
+            font-weight: 600;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .chart-wrapper {
+            position: relative;
+            height: 500px;
+        }
+
+        .alert {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .alert-warning { 
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid var(--warning);
+            color: var(--warning);
+        }
+
+        .alert-error {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--error);
+            color: var(--error);
+        }
+
+        .discharge-result {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.05) 100%);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .discharge-label {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .discharge-value {
+            color: var(--primary);
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 3px solid var(--border);
+            border-top: 3px solid var(--primary);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .chart-wrapper {
+                height: 400px;
+            }
+        }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-box p {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔧 Digital Twin Demo</h1>
+            <p class="subtitle">Heat Pump Neural Network Simulation & Anomaly Detection</p>
+        </header>
+
+        <div class="main-grid">
+            <!-- Input Section -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">⚙️</span>
+                    <h2 class="card-title">Input Parameters</h2>
+                </div>
+
+                <div id="warnings"></div>
+
+                <div class="input-group">
+                    <label class="input-label">
+                        <span>Compressor Speed (rps)</span>
+                        <span class="input-range">[35, 105]</span>
+                    </label>
+                    <input type="number" id="rps" class="input-field" value="70" min="35" max="105" step="1">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">
+                        <span>Air Temperature (°C)</span>
+                        <span class="input-range">[0, 40]</span>
+                    </label>
+                    <input type="number" id="taria" class="input-field" value="20" min="0" max="40" step="0.1">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">
+                        <span>Water Inlet Temperature (°C)</span>
+                        <span class="input-range">[5, 24]</span>
+                    </label>
+                    <input type="number" id="twin" class="input-field" value="15" min="5" max="24" step="0.1">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">
+                        <span>Superheat (°C)</span>
+                        <span class="input-range">[2, 8]</span>
+                    </label>
+                    <input type="number" id="sh" class="input-field" value="5" min="2" max="8" step="0.1">
+                </div>
+
+                <div class="input-group">
+                    <label class="input-label">
+                        <span>Pressure Display</span>
+                    </label>
+                    <div class="switch-container">
+                        <span>Absolute</span>
+                        <label class="switch">
+                            <input type="checkbox" id="pressureSwitch">
+                            <span class="slider"></span>
+                        </label>
+                        <span>Relative</span>
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <!-- <button class="btn btn-secondary" onclick="importData()">
+                        📂 Import Data
+                    </button> -->
+                    <button class="btn btn-primary" onclick="runSimulation()">
+                        ▶️ Run Simulation
+                    </button>
+                </div>
+
+                <div class="info-box">
+                    <p><strong>Note:</strong> This is a simplified demo. The actual neural network runs in MATLAB. Values shown are representative examples.</p>
+                </div>
+            </div>
+
+            <!-- Output Section -->
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-icon">📊</span>
+                    <h2 class="card-title">Output Results</h2>
+                </div>
+
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p style="margin-top: 1rem; color: var(--text-light);">Running neural network simulation...</p>
+                </div>
+
+                <div id="outputTable" style="display: none;">
+                    <table class="output-table">
+                        <tbody id="outputBody">
+                            <!-- Results will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="button-group" style="margin-top: 2rem;">
+                    <button class="btn btn-primary" onclick="detectAnomaly()" id="anomalyBtn" disabled>
+                        🔍 Anomaly Detection
+                    </button>
+                    <button class="btn btn-secondary" onclick="calculateDischarge()" id="dischargeBtn" disabled>
+                        📉 Calculate Discharge
+                    </button>
+                </div>
+
+                <div id="dischargeResult" style="display: none;" class="discharge-result">
+                    <div class="discharge-label">Estimated Refrigerant Discharge</div>
+                    <div class="discharge-value" id="dischargeValue">0.0%</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-container" id="chartContainer" style="display: none;">
+            <div class="card-header">
+                <span class="card-icon">📈</span>
+                <h2 class="card-title">Spider Plot - Model vs Experimental</h2>
+            </div>
+            <div class="chart-wrapper">
+                <canvas id="spiderChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let simulationData = null;
+        let myChart = null;
+
+        // Digital Twin Neural Network (Simplified Version)
+        function digitalTwinNN(inputs) {
+            // Normalize inputs [0, 1]
+            const normalized = [
+                (inputs[0] - 35) / (105 - 35),
+                (inputs[1] - 0) / (40 - 0),
+                (inputs[2] - 5) / (24 - 5),
+                (inputs[3] - 2) / (8 - 2)
+            ];
+
+            // Simplified output (in reality this would be the full neural network)
+            // These are example outputs based on typical heat pump behavior
+            const baseOutputs = [
+                8.5,   // Pficp [bar]
+                25.2,  // Pfucp [bar]
+                12.3,  // Tficp [°C]
+                85.6,  // Tfucp [°C]
+                24.8,  // Pficn [bar]
+                8.2,   // Pfiol [bar]
+                42.3,  // Tfi_cn [°C]
+                38.5,  // Tfiol_ucn [°C]
+                8.1,   // Pfu_VT [bar]
+                10.2,  // Tfu_VT [°C]
+                7.9,   // Pfu_EV [bar]
+                8.5,   // Tfu_EV [°C]
+                inputs[2] + 5, // Twout [°C]
+                3500 + inputs[0] * 20, // Presa [W]
+                12000 + inputs[0] * 50  // Pass [W]
+            ];
+
+            // Add some variation based on inputs
+            const outputs = baseOutputs.map((val, idx) => {
+                const variation = (normalized[0] - 0.5) * 0.1 + (normalized[1] - 0.5) * 0.05;
+                return val * (1 + variation);
+            });
+
+            return outputs;
+        }
+
+        function validateInputs() {
+            const rps = parseFloat(document.getElementById('rps').value);
+            const taria = parseFloat(document.getElementById('taria').value);
+            const twin = parseFloat(document.getElementById('twin').value);
+            const sh = parseFloat(document.getElementById('sh').value);
+
+            const warnings = [];
+
+            if (rps < 35 || rps > 105) {
+                warnings.push('⚠️ RPS value is outside training range [35, 105]. Results may be inaccurate.');
+            }
+            if (taria < 0 || taria > 40) {
+                warnings.push('⚠️ Air temperature is outside training range [0, 40]. Results may be inaccurate.');
+            }
+            if (twin < 5 || twin > 24) {
+                warnings.push('⚠️ Water temperature is outside training range [5, 24]. Results may be inaccurate.');
+            }
+            if (sh < 2 || sh > 8) {
+                warnings.push('⚠️ Superheat is outside training range [2, 8]. Results may be inaccurate.');
+            }
+            if (rps < 70 && taria < 20) {
+                warnings.push('⚠️ Ventilation oscillation possible between 0-2V for these RPS and air temperature values.');
+            }
+
+            const warningsDiv = document.getElementById('warnings');
+            if (warnings.length > 0) {
+                warningsDiv.innerHTML = warnings.map(w => 
+                    `<div class="alert alert-warning">${w}</div>`
+                ).join('');
+            } else {
+                warningsDiv.innerHTML = '';
+            }
+
+            return warnings.length === 0;
+        }
+
+        function runSimulation() {
+            // Validate inputs
+            document.getElementById('rps').dispatchEvent(new Event('input'));
+            
+            // Get inputs
+            const inputs = [
+                parseFloat(document.getElementById('rps').value),
+                parseFloat(document.getElementById('taria').value),
+                parseFloat(document.getElementById('twin').value),
+                parseFloat(document.getElementById('sh').value)
+            ];
+
+            // Show loading
+            document.getElementById('loading').classList.add('active');
+            document.getElementById('outputTable').style.display = 'none';
+
+            // Simulate network delay
+            setTimeout(() => {
+                // Run neural network
+                const outputs = digitalTwinNN(inputs);
+                simulationData = outputs;
+
+                // Check if relative pressure
+                const isRelative = document.getElementById('pressureSwitch').checked;
+                if (isRelative) {
+                    outputs[0] -= 1.01325;
+                    outputs[1] -= 1.01325;
+                    outputs[4] -= 1.01325;
+                    outputs[5] -= 1.01325;
+                    outputs[8] -= 1.01325;
+                    outputs[10] -= 1.01325;
+                }
+
+                // Display results
+                displayResults(outputs);
+
+                // Hide loading
+                document.getElementById('loading').classList.remove('active');
+                document.getElementById('outputTable').style.display = 'block';
+
+                // Enable buttons
+                document.getElementById('anomalyBtn').disabled = false;
+                document.getElementById('dischargeBtn').disabled = false;
+            }, 1500);
+        }
+
+        function displayResults(outputs) {
+            const labels = [
+                'Pficp [bar]',
+                'Pfucp [bar]',
+                'Tficp [°C]',
+                'Tfucp [°C]',
+                'Pficn [bar]',
+                'Pfiol [bar]',
+                'Tfi_cn [°C]',
+                'Tfiol_ucn [°C]',
+                'Pfu_VT [bar]',
+                'Tfu_VT [°C]',
+                'Pfu_EV [bar]',
+                'Tfu_EV [°C]',
+                'Twout [°C]',
+                'Presa [W]',
+                'Pass [W]'
+            ];
+
+            const tbody = document.getElementById('outputBody');
+            tbody.innerHTML = labels.map((label, idx) => `
+                <tr>
+                    <td>${label}</td>
+                    <td>${outputs[idx].toFixed(2)}</td>
+                </tr>
+            `).join('');
+        }
+
+        function detectAnomaly() {
+            if (!simulationData) {
+                alert('Please run simulation first!');
+                return;
+            }
+
+            // Generate experimental data (simulated with noise)
+            const experimentalData = simulationData.map(val => 
+                val * (0.95 + Math.random() * 0.1)
+            );
+
+            // Create spider chart
+            createSpiderChart(simulationData, experimentalData);
+
+            // Show chart
+            document.getElementById('chartContainer').style.display = 'block';
+
+            // Scroll to chart
+            document.getElementById('chartContainer').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function createSpiderChart(modelData, expData) {
+            const labels = [
+                'Pficp', 'Pfucp', 'Tficp', 'Tfucp', 'Pficn', 'Pfiol',
+                'Tficn', 'Tfiol', 'Pfuvt', 'Tfuvt', 'Pfuev', 'Tfuev',
+                'Twout', 'Presa', 'Pass'
+            ];
+
+            // Normalize data for radar chart [0, 100]
+            const normalizeData = (data) => {
+                const max = Math.max(...data);
+                const min = Math.min(...data);
+                return data.map(val => ((val - min) / (max - min)) * 100);
+            };
+
+            const ctx = document.getElementById('spiderChart');
+            
+            // Destroy previous chart if exists
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Model Prediction',
+                        data: normalizeData(modelData),
+                        borderColor: 'rgb(59, 130, 246)',
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgb(59, 130, 246)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(59, 130, 246)'
+                    }, {
+                        label: 'Experimental Data',
+                        data: normalizeData(expData),
+                        borderColor: 'rgb(251, 146, 60)',
+                        backgroundColor: 'rgba(251, 146, 60, 0.2)',
+                        borderWidth: 2,
+                        pointBackgroundColor: 'rgb(251, 146, 60)',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: 'rgb(251, 146, 60)'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                stepSize: 20,
+                                color: '#94a3b8',
+                                backdropColor: 'transparent'
+                            },
+                            grid: {
+                                color: '#334155'
+                            },
+                            pointLabels: {
+                                color: '#cbd5e1',
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#cbd5e1',
+                                font: {
+                                    size: 14
+                                },
+                                padding: 20
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function calculateDischarge() {
+            if (!simulationData) {
+                alert('Please run simulation first!');
+                return;
+            }
+
+            // Simplified discharge calculation
+            const rps = parseFloat(document.getElementById('rps').value);
+            const taria = parseFloat(document.getElementById('taria').value);
+
+            // Simulate discharge percentage based on inputs
+            const discharge = (5 + (rps - 35) * 0.1 + (taria - 20) * 0.2 + Math.random() * 3).toFixed(1);
+
+            document.getElementById('dischargeValue').textContent = `${discharge}%`;
+            document.getElementById('dischargeResult').style.display = 'block';
+        }
+
+        function importData() {
+            // Create file input
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.csv,.txt';
+            
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = (event) => {
+                    // Simulate reading file data
+                    // In reality, you would parse the CSV file
+                    alert('File imported successfully! Data would be parsed and loaded into input fields.');
+                    
+                    // Example: set some values
+                    document.getElementById('rps').value = 70;
+                    document.getElementById('taria').value = 25;
+                    document.getElementById('twin').value = 12;
+                    document.getElementById('sh').value = 5;
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        // Add input validation listeners
+        document.getElementById('rps').addEventListener('input', validateInputs);
+        document.getElementById('taria').addEventListener('input', validateInputs);
+        document.getElementById('twin').addEventListener('input', validateInputs);
+        document.getElementById('sh').addEventListener('input', validateInputs);
+    </script>
+</body>
+</html>
