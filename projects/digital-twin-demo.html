@@ -404,7 +404,7 @@
                         <span>Compressor Speed (rps)</span>
                         <span class="input-range">[35, 105]</span>
                     </label>
-                    <input type="number" id="rps" class="input-field" value="105" min="35" max="105" step="1" readonly>
+                    <input type="number" id="rps" class="input-field" value="105" min="35" max="105" step="1">
                 </div>
 
                 <div class="input-group">
@@ -412,7 +412,7 @@
                         <span>Air Temperature (°C)</span>
                         <span class="input-range">[0, 40]</span>
                     </label>
-                    <input type="number" id="taria" class="input-field" value="20" min="0" max="40" step="0.1" readonly>
+                    <input type="number" id="taria" class="input-field" value="20" min="0" max="40" step="0.1">
                 </div>
 
                 <div class="input-group">
@@ -420,7 +420,7 @@
                         <span>Water Inlet Temperature (°C)</span>
                         <span class="input-range">[5, 24]</span>
                     </label>
-                    <input type="number" id="twin" class="input-field" value="12.36" min="5" max="24" step="0.01" readonly>
+                    <input type="number" id="twin" class="input-field" value="12.36" min="5" max="24" step="0.01">
                 </div>
 
                 <div class="input-group">
@@ -428,7 +428,7 @@
                         <span>Superheat (K)</span>
                         <span class="input-range">[2, 8]</span>
                     </label>
-                    <input type="number" id="sh" class="input-field" value="3.20" min="2" max="8" step="0.01" readonly>
+                    <input type="number" id="sh" class="input-field" value="3.20" min="2" max="8" step="0.01">
                 </div>
 
 
@@ -439,7 +439,7 @@
                 </div>
 
                 <div class="info-box">
-                    <p><strong>Note:</strong> This is a simplified demo. The actual neural network runs in MATLAB. Values shown are representative examples.</p>
+                    <p><strong>Note:</strong> This is a simplified demo. The actual neural network runs in MATLAB. Values shown are representative examples. Experimental data are representative and generated from  the neural network predictions </p>
                 </div>
             </div>
 
@@ -686,8 +686,8 @@
                     const minVal = Math.min(modelVal, expVal);
                     const range = maxVal - minVal;
                     
-                    // Add 20% margin on each side
-                    const margin = range * 0.2 || maxVal * 0.1; // Fallback if range is 0
+                    // Add % margin on each side
+                    const margin = range * 1.2 || maxVal * 1.1; // Fallback if range is 0
                     const min = minVal - margin;
                     const max = maxVal + margin;
                     
